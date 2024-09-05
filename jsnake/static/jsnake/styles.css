@@ -1,0 +1,853 @@
+/* GENERAL */
+* {
+    padding: 0px;
+    margin: 0px
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html, body {
+    height: 100%;
+    color: white;
+}
+
+body {
+    margin: 0px;
+    font-family: 'Calibri';
+    background-color: black;
+}
+
+body::-webkit-scrollbar, .modal::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+}
+
+body::-webkit-scrollbar-track, .modal::-webkit-scrollbar-track {
+    background: #1a2424;
+}
+
+body::-webkit-scrollbar-thumb, .modal::-webkit-scrollbar-thumb {
+    background-color: green;
+    border-radius: 20px;
+    border: 3px solid #1a2424;
+}
+/* LAYOUT */
+#logo-div {
+    width: 99%;
+    overflow: hidden;
+    padding-left: 10px;
+    height: fit-content;
+    margin-bottom: 20px;
+}
+
+
+#logo-img {
+    width: 300px;
+    max-width: 100%;
+    height: 90px;
+    margin-top: 20px;
+}
+
+h3 {
+    color: lightgray;
+    font-weight: lighter;
+    font-style: italic;
+}
+
+#nav-div {
+    font-family: 'Manaspace Regular';
+    font-size: 1vw;
+    overflow: hidden;
+    background-color: yellow;
+    width: 100%;
+    margin-top: 0px;
+    position: static;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#responsive-icon {
+    display: none;
+}
+
+.topnav a {
+    color: green;
+    text-decoration: none;
+    padding: 16px;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.active, .topnav a:hover {
+    background-color: #ffd800;
+}
+
+#username-display {
+    color: black;
+    float: right;
+    font-weight: lighter;
+}
+/* HOME */
+#home-div, #comments-div {
+    min-width: 360px;
+    max-width: 900px;
+    color: yellow;
+}
+
+.home-text {
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: lightgray;
+    font-weight: lighter;
+    text-align: justify;
+    text-indent: 30px;
+}
+.home-text a{
+    color:darkgoldenrod;
+    text-decoration:none;
+    font-weight:bold;
+}
+.home-text a:hover{
+    color:gold;
+    text-decoration:underline;
+    font-weight:bold;
+}
+.home-images {
+    max-width: 100%;
+    height: auto;
+    text-align: center;
+    padding: 20px;
+    padding-bottom: 1px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 256px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.home-images:hover { 
+    opacity: 0.7;
+}
+
+figcaption {
+    color: darkgray;
+    text-align: center;
+    font-weight: lighter;
+}
+.modal { 
+    display: none; 
+    position: fixed; 
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow:scroll;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9); 
+}
+
+.modal-content { 
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+.caption { 
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: gold;
+    padding: 10px 0;
+    height: 150px;
+}
+
+.modal-content, #caption {
+    animation-name: zoom_in;
+    animation-duration: 0.2s;
+}
+@keyframes zoom_in {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: goldenrod;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close-button:hover, .close-button:focus {
+    color: gold;
+    text-decoration: none;
+    cursor: pointer;
+}
+#comment-form-div {
+    min-width: 300px;
+    width: 100%;
+}
+
+textarea {
+    padding: 10px;
+    min-width: 300px;
+    width: 95%;
+    max-width: inherit;
+    height: 50px;
+    resize: none;
+    border-radius: 4px 4px;
+}
+
+textarea:focus {
+    outline: none;
+    border-style: solid;
+    border-color: green;
+    border-width: 2px;
+}
+#comments-display-div {
+    padding-top: 20px;
+}
+.comment_display_div {
+    padding: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: darkgoldenrod;
+    border-left-style: none;
+    border-right-style: none;
+}
+.comment-autor {
+    color: darkgray;
+    font-weight: bold;
+    font-family: 'Manaspace';
+}
+
+.comment-content {
+    padding: 5px;
+    color: yellowgreen
+}
+
+.comment-timestamp {
+    color: darkslategray;
+    font-weight: lighter;
+}
+#comments-pagination-div{
+    height:50px;
+    min-height:50px;
+}
+/* PLAY */
+#user-username-div {
+    padding: 10px;
+    margin: 10px;
+    margin-right: 0px;
+}
+
+#signed-as {
+    color: darkgray;
+    float: right;
+}
+#game-menu, #gameover-menu {
+    color: darkslategray;
+    font-family: 'Manaspace Regular';
+    background-color: yellow;
+    text-align: center;
+    min-width: 300px;
+    min-height: 300px;
+    max-width: 600px;
+    max-height: 644px;
+    width: 100%;
+    height: 100%;
+    border-style: solid;
+    border-color: darkgoldenrod;
+    border-width: 8px;
+}
+
+canvas {
+    max-width: 600px;
+    width: 100%;
+}
+#game-menu-div-1 {
+    margin-bottom: 2%;
+    margin-top: 1%;
+}
+
+#game-title-menu {
+    font-size: 90px;
+}
+.menu-text {
+    color: darkslategray;
+    font-size: 25px;
+}
+
+#game-menu-div-2 {
+    padding: 10px;
+    margin-top: 2%;
+    margin-bottom: 20px;
+}
+
+#game-menu-div-3 {
+    padding: 10px;
+    margin-top: 1%;
+}
+.game-menu-button {
+    padding: 10px;
+    border-style: hidden;
+    border-radius: 4px 4px;
+    background-color: green;
+    color: white;
+    font-family: 'Manaspace';
+    font-size: 20px;
+}
+
+.game-menu-button:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.game-menu-button:focus {
+    outline: solid;
+    outline-color: yellowgreen;
+    padding: 11px;
+}
+
+#snek-gif {
+    padding: 50px;
+}
+#play-button {
+    padding: 20px;
+    font-size: 30px;
+    background-color: limegreen;
+    display: block;
+    margin: auto;
+}
+#score-div {
+    max-width: 600px;
+    min-width: 300px;
+    width: 100%;
+    border-bottom-style: hidden;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+}
+
+#score-text {
+    padding: 10px;
+    font-size: 20px;
+}
+
+#level-text {
+    padding-left:10px;
+    color: darkslategray;
+}
+#pause-button {
+    border-style: none;
+    background-color: inherit;
+    font-weight: bold;
+    color: inherit;
+    float: right;
+}
+
+#pause-button:focus {
+    outline: none;
+}
+
+#pause-resume-icon {
+    padding: 5px;
+    padding-right: 15px;
+}
+
+#pause-resume-icon:hover {
+    cursor: pointer;
+}
+.container{
+    position:relative;
+}
+#pause-menu {
+    position: absolute;
+    font-family: 'Manaspace';
+    padding: 10px;
+    background-color: yellow;
+    text-align: center;
+    max-width: 250px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+    border-color: gold;
+    border-radius: 4px 4px;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#resume-button, #back-button {
+    margin: 10px;
+}
+
+#resume-button {
+    font-size: 22px;
+}
+
+#back-button {
+    font-size: 15px;
+}
+#play-buttons-div {
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    height: fit-content;
+    min-width: 600px;
+    max-width: 100%;
+    text-align: center;
+}
+
+#game-over-text {
+    padding: 10%;
+    font-size: 72px;
+}
+#your-score {
+    padding: 5%;
+    padding-top: 100px;
+    font-size: 28px;
+}
+#new-highscore {
+    color: limegreen;
+    width: 20px;
+    text-align: center;
+    animation: MoveUpDown 0.5s linear infinite;
+    position: relative;
+    left: 0;
+    bottom: 0;
+}
+@keyframes MoveUpDown {
+    0%, 100% {
+        bottom: 0;
+    }
+
+    50% {
+        bottom: 5px;
+    }
+}
+#score-display-div {
+    padding-top: 10px;
+}
+
+#sign-in-message, #highscore-display {
+    margin: 20px;
+}
+#highscore-display {
+    font-size: 20px;
+    color: darkgoldenrod;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#save-score {
+    background-color: lime;
+    width: fit-content;
+    margin: 10px;
+}
+#try-again-button {
+    margin-top: 150px;
+}
+#instruction-div {
+    color: white;
+    max-width: 600px;
+    width: 100%;
+}
+
+#instructions {
+    padding: 10px;
+}
+
+.instruction-item {
+    color: white;
+}
+
+#canvas-score-div {
+    display: block;
+}
+
+#stage, #score-div {
+    border-style: solid;
+    border-color: yellow;
+    border-width: 2px;
+    margin-top: 0%;
+    font-family: 'Manaspace'
+}
+#play-buttons-div {
+    display: none;
+}
+
+#left-right-div {
+    display: block;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+}
+
+.digital-keyboard {
+    background-color: yellow;
+    color: #856106;
+    margin: 5px;
+    margin-left: 30px;
+    margin-right: 30px;
+    border-style: hidden;
+    border-radius: 4px 4px;
+    font-size: 45px;
+    height: 50px;
+    width: 50px;
+}
+
+#instructions-body {
+    min-height: fit-content;
+    padding: 10px;
+}
+
+.instruction-title {
+    color: darkgrey;
+}
+
+dt {
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+dd {
+    margin: 10px;
+    margin-left: 35px;
+}
+/* SHARED SETTINGS */
+.body-divs, #score-div, #home-div {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 5%;
+}
+.disguised-buttons {
+    border-style: none;
+    background-color: inherit;
+}
+.disguised-buttons:hover {
+    cursor: pointer;
+    text-decoration:underline;
+}
+.disguised-buttons:focus {
+    outline: none;
+}
+/* SCORES */
+h1 {
+    font-family: 'Manaspace Regular';
+    color: yellow;
+    padding: 30px;
+    padding-left: 10px;
+    margin: auto;
+}
+
+.highest_score_display {
+    padding: 7px;
+    padding-left: 0px;
+}
+
+.first_place_ranking {
+    background-color: goldenrod;
+    color: #82600c;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    padding: 6px;
+    font-size: 30px;
+}
+
+#scores-div {
+    max-width: 100%;
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    padding-bottom: 100px;
+    display: grid;
+}
+
+#scores-div h1 {
+    font-size: 30px;
+}
+
+.scores-difficulty {
+    font-family: 'Manaspace';
+    font-size: 20px;
+    color: yellow;
+    padding: 10px;
+}
+
+#easy-scores, #hard-scores {
+    min-width: 400px;
+    margin: 0px;
+    margin-top: 10px;
+    padding: 1px;
+    overflow: hidden;
+}
+.pagination-button {
+    font-family: 'Neutra Text';
+    background-color: goldenrod;
+    padding: 5px;
+    border-style: solid;
+    border-color: goldenrod;
+    margin: 0px;
+    margin-bottom: 50px;
+    color: #312506;
+    width: 60px;
+}
+
+.pagination-button:hover {
+    border-style: solid;
+    border-color: #312506;
+}
+.pagination-button:focus {
+    outline: gold;
+}
+.pagination-buttons-div {
+    margin-top: 5px;
+    min-width: 400px;
+    width: 100%;
+}
+
+#next-easy, #next-hard, #next-comments {
+    float: right;
+}
+
+#easy-scores, #hard-scores, .score_list_div, .highest_score_display {
+    font-family: 'Manaspace';
+    border-style: solid;
+    border-color: goldenrod;
+    border-width: 1px;
+    min-height: fit-content;
+    color: white;
+}
+
+.score_list_div {
+    padding: 10px;
+    padding-left: 0px;
+}
+
+.ranking-num {
+    padding: 10px;
+    font-size: 20px;
+    background-color: #181717;
+}
+
+.scorer-name {
+    font-family: 'Manaspace';
+    font-size: 20px;
+    color: gray;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.highlited-scorer-name {
+    font-family: 'Manaspace';
+    font-size: 23px;
+    color: gold;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.first-place-value {
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+.score-value {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.other-info-text {
+    font-family: 'Bahnschrift';
+    font-weight: lighter;
+    float: right;
+    color: #2a2a2a;
+    font-size: 14px;
+}
+/* SOURCE */
+#source-div {
+    min-width: 360px;
+    max-width: 800px;
+    padding-bottom: 20px;
+    margin-top: 0px;
+}
+
+.source-titles {
+    font-family: 'Manaspace';
+    font-size: 20px;
+    color: yellow;
+}
+
+code {
+    border-style: solid;
+    border-color: darkslategray;
+    border-width: 2px;
+    border-radius: 4px 4px;
+    margin-bottom: 30px;
+    height: 300px;
+    overflow: scroll;
+}
+
+code::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+code::-webkit-scrollbar-track {
+    background: #1a2424;
+}
+
+code::-webkit-scrollbar-thumb {
+    background-color: darkslategray;
+    border-radius: 20px;
+    border: 3px solid #1a2424;
+}
+
+.source-text {
+    text-indent: 10px;
+    color: gray;
+    padding: 10px;
+    padding-bottom: 20px;
+    text-align: justify;
+}
+/*LOGIN/REGISTER*/
+.form-title {
+    color: green;
+    font-family: 'Neutra Text';
+    font-size: 30px;
+}
+
+.form-divs {
+    min-width: 325px;
+    max-width: 310px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    padding: 10px;
+    border-radius: 4px 4px;
+    background-color: yellow;
+    color: #82600c;
+    text-align: center;
+    border-style: solid;
+    border-color: gold;
+    font-size: 14px;
+}
+
+input[type="submit"] {
+    background-color: green;
+    color: white;
+    padding: 5px;
+    border-style: solid;
+    border-color: darkgreen;
+    border-radius: 2px 2px;
+    margin: 10px;
+}
+input[type="submit"]:hover {
+    cursor:pointer;
+}
+input[type="submit"]:focus {
+    outline:solid;
+    outline-color: darkgreen;
+    outline-width:1px;
+    border-radius: 0px 0px;
+}
+#register-here-button, #login-here-button {    
+    font-weight: bold;
+    color: green;
+    font-size: 13px;
+}
+.form-control {
+    margin: 5px;
+    padding: 5px;
+    border-color: gold;
+    border-style: solid;
+    border-radius: 4px 4px;
+    padding: 5px;
+    width: 250px;
+    height: 25px;
+}
+.form-control:focus {
+    outline: solid;
+    outline-color: gold;
+    outline-width:1px;
+    border-radius: 0px 0px;
+}
+@media screen and (max-width: 705px) {
+    .menu_list, .active {
+        display: none;
+    }
+
+    .topnav #responsive-icon {
+        float: right;
+        display: block;
+    }
+
+    #home-link {
+        display: block;
+        float: left;
+        overflow: hidden;
+        padding-bottom: 25px;
+    }
+
+    #nav-div {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        min-width: 200px;
+        width: 100%;
+    }
+
+    #nav-div a, #nav-di a.icon {
+        font-size: 7vw;
+    }
+
+    .topnav.responsive {
+        position: relative;
+    }
+
+    .responsive a.icon {
+        position: absolute;
+        right: 0;
+    }
+
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+
+    .other-info-text, .scorer-name, .highlited-scorer-name {
+        font-size: 2.5vw;
+        padding-top: 5px;
+    }
+
+    #play-buttons-div {
+        display: block;
+        min-width: 300px;
+        max-width: 600px;
+        width: 100%;
+    }
+    .modal-content {
+        width: 100%;
+    }
+}

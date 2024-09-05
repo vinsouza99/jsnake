@@ -1,0 +1,279 @@
+{% extends "jsnake/layout.html" %}
+{% load static %}
+{% block title %}JSnake - Source{% endblock %}
+{% block script %}
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.5.0/build/styles/atom-one-dark.min.css">
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.5.0/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="{% static 'jsnake/source.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="body-divs" id="source-div">
+    <h1>Source</h1>
+    <p class="source-text">
+        If you liked the game and want to add it in your website or simply are curious on how
+        to program a game in JavaScript, you're lucky. Here is the code needed to run this game:
+    </p>
+    <span class="source-titles">Setup</span>
+    <p class="source-text">
+        Before actually coding the game, you need to set some variables and functions
+    </p>
+    <div class="snippet-div">
+<pre><code class="js">
+/* Variables definition */
+var score = 0;
+var speed = 1;
+var vx = vy = 0;
+var is_paused = false;
+
+/*render snake in the center of the screen.The canvas' 
+* dimensions should be taken in consideration for the
+* numbers chosen here.
+*/
+var snakex = 30;
+var snakey = 28;
+
+/*stands for 'side length'. It determines that every square that
+* represents the apple or the snake will have it side with length
+* of 10 pixels. The canvas' dimensions should be taken in consideration
+* for the number chosen here.
+*/
+var sl = 10;
+
+/*stands for 'render spaces'. It determines that there will be 59
+* spaces vertically and horizontally to the snake and apple to
+* render. The canvas' dimensions should be taken in consideration
+* for the number chosen here.
+*/
+var rs = 59;
+
+
+/*To prevent that the snake and the apple are rendered in the same place,
+* (very low chances but I don't want to ruin your fun with this crippling
+* concern) make sure that at least one of the inital coordinates are different.
+*/
+var applex;
+do {
+    applex = Math.floor(Math.random() * rs);
+} while (applex == 30)
+var appley = Math.floor(Math.random() * rs);
+
+var trail = []
+var tail = 3;
+
+/*you need a variable to reference the canvas where the game will be rendered.
+*  And of course, this implies that you will need to add a canvas tag to
+* your HTML. In my HTML, its ID is 'stage'
+*/
+const canvas = document.querySelector('#stage');
+var context = canvas.getContext("2d"); //you need the 2d context also
+
+/* Program keyboard gameplay */
+function keyPush(event) {
+    event.preventDefault(); // prevent scrolling the page when using the arrow keys
+    switch (event.keyCode) { //every key in the keyboard has a code
+        //esc (pause)
+        case 27:
+            is_paused = !is_paused; //toggle the state of the game
+            if (is_paused) {
+	            clearInterval(intervalID);
+            } else {
+                intervalID = setInterval(game, 60);
+            }
+            break;
+        //left arrow
+        case 37:
+            if (vx == 0) { //if the snake is not going in the horizontal direction already
+                vx = -speed;
+                vy = 0;
+            }
+            break;
+        //up arrow
+        case 38:
+            if (vy == 0) {//if the snake is not going in the vertical direction already
+                vx = 0;
+                vy = -speed;
+            }
+            break;
+        //right arrow
+        case 39:
+            if (vx == 0) { //if the snake is not going in the horizontal direction already
+                vx = speed;
+                vy = 0;
+            }
+            break;
+        //down arrow
+        case 40:
+            if (vy == 0) { //if the snake is not going in the vertical direction already
+                vx = 0;
+                vy = +speed;
+            }
+            break;
+     }
+}
+
+/* Enable keyboard gameplay */
+document.addEventListener("keydown", keyPush);
+
+/*Start game by calling the game function every 60 miliseconds*/
+var intervalID = setInterval(game(), 60);
+
+</code></pre>
+    </div>
+
+    <p class="source-text">
+        The game code for both difficulties are very, very similar. The only difference is an extra condition
+        to determine wether the game has endend or not. Despite that, the code for both difficulties will be shown
+        entirely and separately:
+    </p>
+
+    <span class="source-titles">Easy</span>
+    <p class="source-text">
+        The code for the easy difficulty:
+    </p>
+    <div class="snippet-div">
+<pre><code class="js">
+function game() {
+    // Every time this function is called, the snake moves a bit
+    snakex += vx;
+    snakey += vy;
+
+    // The snake reaches to the limit of the canvas, make it appear in the opposite side
+    if (snakex < 0) {
+        snakex = rs;
+    }
+    if (snakex > rs) {
+        snakex = 0;
+    }
+    if (snakey < 0) {
+        snakey = rs;
+    }
+    if (snakey > rs) {
+        snakey = 0;
+    }
+    //render play area
+    context.fillStyle = "black"; //for the classic color scheme, change 'black' to '#9acc99'
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    //render apple
+    context.fillStyle = "red"; //for the classic color scheme, change 'red' to '#346856'
+    context.fillRect(applex * sl, appley * sl, sl, sl);
+
+    //render snake
+    context.fillStyle = "green"; //for the classic color scheme, change 'green' to '#030100'
+    for (var i = 0; i < trail.length; i++) {
+        context.fillRect(trail[i].x * sl, trail[i].y * sl, sl, sl);
+
+        //if the snake hits itself
+        if (trail[i].x == snakex && trail[i].y == snakey && tail != 3) {
+            clearInterval(intervalID); //stop the game function
+            document.removeEventListener("keydown", keyPush); //reset keyboard functionality
+            gameover(); //whatever you want to do when the game ends
+        }
+    }
+    trail.push({ x: snakex, y: snakey });
+    while (trail.length > tail) {
+        trail.shift();
+    }
+    //if the snake eats the apple
+    if (applex == snakex && appley == snakey) {
+        score += 50;
+        //check if the snake has evolved!
+        if (score == 200) {
+            level = 'SNAKE';
+        } else if (score == 1000) {
+            level = 'PYTHON';
+        }
+        //the snake grows faster depending of it's level
+        if (level === 'SLUG') {
+            tail++;
+        } else if (level === 'SNAKE') {
+            tail += 2;
+        } else {
+            tail += 3;
+        }
+        trail.push({ x: snakex, y: snakey });
+
+        //assign apple to a random location
+        applex = Math.floor(Math.random() * rs);
+        appley = Math.floor(Math.random() * rs);
+    }
+}
+</code></pre>
+    </div>
+    <span class="source-titles">Hard</span>
+    <p class="source-text">
+        The code for the hard difficulty:
+    </p>
+    <div class="snippet-div">
+<pre><code class="js">
+function game() {
+    //every time this function is called, the snake moves a bit
+    snakex += vx;
+    snakey += vy;
+    //snake reaches to the limit of the canvas
+    if (snakex < 0 || snakex > rs || snakey < 0 || snakey > rs) {
+        clearInterval(intervalID); //stop the game function
+        document.removeEventListener("keydown", keyPush); //reset keyboard functionality
+        gameover(); //whatever you want to do when the game ends
+    }
+    //render play area
+    context.fillStyle = "black"; //for the classic color scheme, change 'black' to '#9acc99'
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    canvas.style.borderWidth = '5px';
+
+    //render apple
+    context.fillStyle = "red"; //for the classic color scheme, change 'red' to '#346856'
+    context.fillRect(applex * sl, appley * sl, sl, sl);
+
+    //render snake
+    context.fillStyle = "green"; //for the classic color scheme, change 'green' to '#030100'
+    for (var i = 0; i < trail.length; i++) {
+        context.fillRect(trail[i].x * sl, trail[i].y * sl, sl, sl);
+
+        //if the snake hits itself
+        if (trail[i].x == snakex && trail[i].y == snakey && tail != 3) {
+            clearInterval(intervalID); //stop the game function
+            document.removeEventListener("keydown", keyPush); //reset keyboard functionality
+            gameover(); //whatever you want to do when the game ends
+        }
+    }
+    trail.push({ x: snakex, y: snakey });
+    while (trail.length > tail) {
+        trail.shift();
+    }
+    //if the snake eats the apple
+    if (applex == snakex && appley == snakey) {
+        score += 50;
+        //check if the snake has evolved!
+        if (score == 400) {
+            level = 'SNAKE';
+        } else if (score == 1500) {
+            level = 'PYTHON';
+        }
+        //the snake grows faster depending of it's level
+        if (level === 'SLUG') {
+            tail++;
+        } else if (level === 'SNAKE') {
+            tail += 2;
+        } else {
+            tail += 3;
+        }
+        trail.push({ x: snakex, y: snakey });
+        
+        //assign apple to a random location
+        applex = Math.floor(Math.random() * rs);
+        appley = Math.floor(Math.random() * rs);
+    }
+}
+</code></pre>
+    </div>
+    <p class="source-text">
+        Please note that this is not the exact code that runs in this website. There are other functions and
+        settings that are specific to the well running of the game in this very site, but they were cut out
+        in order to give you access to a more generic code so you can use and program it the way you like!
+    </p>
+</div>
+{% endblock %}

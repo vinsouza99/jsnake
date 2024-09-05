@@ -1,0 +1,51 @@
+{% extends "jsnake/layout.html" %}
+{% load static %}
+{% block title %}JSnake - Join{% endblock %}
+{% block script %}
+<script src="{% static 'jsnake/join.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="form-divs" id="login-div">
+    <span class="form-title">Login</span>
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        {% if message %}
+        <p>{{message}}</p>
+        {% endif %}
+        <div class="form-group">
+            <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Login">
+    </form>
+
+    <span class="login-register-message">Don't have an account? <button class="disguised-buttons" id="register-here-button">Register here.</button></span>
+</div>
+<div class="form-divs" id="register-div">
+    <span class="form-title">Register</span>
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        {% if message %}
+        <p>{{message}}</p>
+        {% endif %}
+        <div class="form-group">
+            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Register">
+    </form>
+    <span class="login-register-message">Already have an account? <button class="disguised-buttons" id="login-here-button">Login here.</button></span>
+
+</div>
+{% endblock %}

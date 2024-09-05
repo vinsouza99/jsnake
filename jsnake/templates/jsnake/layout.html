@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}JSnake{% endblock %}</title>
+    <link href="{% static 'jsnake/styles.css' %}" rel="stylesheet">
+    <link rel="icon" href="static/jsnake/media/snek.png" />
+    <link rel="shortcut icon" href="static/jsnake/media/snek.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/9b115d22ca.js" crossorigin="anonymous"></script>
+    <script>
+        function dropDownMenu() {
+            var nav = document.getElementById("nav-div");
+            if (nav.className === "topnav") {
+              document.querySelector('#home-link').style.width = '80%';
+                nav.className += " responsive";
+            } else {
+             document.querySelector('#home-link').style.width = '20%';
+                nav.className = "topnav";
+            }
+        }
+    </script>
+    {% block script %}
+    {% endblock %}
+</head>
+<body>
+    <div id="logo-div">
+        <a href="{% url 'home' %}">
+            <img src="static/jsnake/media/JSnake.png" alt="logo" id="logo-img">
+        </a>
+        <h3>Snake game written in JavaScript for your delight</h3>
+    </div>
+
+    <div class="topnav" id="nav-div">
+        <a href="{% url 'home' %}" id="home-link">Home</a>
+        <a href="javascript:void(0);" class="icon" id="responsive-icon" onclick="dropDownMenu()">&#9776;</a>
+        <a href="{% url 'play' %}" class="menu_list" id="play-link">Play</a>
+        <a href="{% url 'scores' %}" class="menu_list" id="score-link">Scores</a>
+        <a href="{% url 'source' %}" class="menu_list" id="source-link">Source</a>
+
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="menu_list" id="join-link">Logout</a>
+        {% else %}
+        <a href="{%url 'join' %}" class="menu_list" id="join-link">Sign in</a>
+        {% endif %}
+    </div>
+    <div id="user-username-div">
+        {% if user.is_authenticated %}
+            <span id="signed-as"> signed as <span id="user-username"><strong>{{user.username}}</strong></span></span>
+        {% else %}
+            <span id="signed-as"><span id="user-username"></span></span>
+        {% endif %}
+    </div>
+   
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

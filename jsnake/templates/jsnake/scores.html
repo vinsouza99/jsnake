@@ -1,0 +1,27 @@
+{% extends "jsnake/layout.html" %}
+{% load static %}
+{% block title %}JSnake - Highscores{% endblock %}
+{% block script %}
+<script src="{% static 'jsnake/scores.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="body-divs" id="scores-div">
+    <h1>Highscores</h1>
+
+    <span class="scores-difficulty">Easy</span>
+    <div class="body-divs" id="easy-scores"></div>
+
+    <div class="pagination-buttons-div" id="easy-pagination-div">
+        <button class="pagination-button" id="previous-easy">Previous</button>
+        <button class="pagination-button" id="next-easy">Next</button>
+    </div>
+
+    <span class="scores-difficulty">Hard</span>
+    <div class="body-divs" id="hard-scores"></div>
+
+    <div class="pagination-buttons-div" id="hard-pagination-div">
+        <button class="pagination-button" id="previous-hard">Previous</button><button class="pagination-button" id="next-hard">Next</button>
+    </div>
+</div>
+{% endblock %}

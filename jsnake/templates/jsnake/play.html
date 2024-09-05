@@ -1,0 +1,87 @@
+{% extends "jsnake/layout.html" %}
+{% load static %}
+{% block title %}JSnake - Play{% endblock %}
+{% block script %}
+<script src="{% static 'jsnake/snake.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+
+<div class="body-divs" id="game-menu" width="600" height="600">
+    <div id="game-menu-div-1">
+        <span class="menu-text" id="game-title-menu"> JSnake </span>
+    </div>
+    <span class="menu-text"> Choose difficulty </span>
+    <div id="game-menu-div-2">
+        <button class="game-menu-button" id="easy-button"> Easy </button>
+        <button class="game-menu-button" id="hard-button"> Hard </button>
+    </div>
+    <span class="menu-text"> Choose style </span>
+    <div id="game-menu-div-3">
+        <button class="game-menu-button" id="classic-button"> Classic </button>
+        <button class="game-menu-button" id="jsnake-button"> JSnake </button>
+    </div>
+    <img src="static/jsnake/media/snek_gif.gif" id="snek-gif" width="100" height="130" />
+
+    <button class="game-menu-button" id="play-button"> Play </button>
+</div>
+<div class="body-divs" id="gameover-menu">
+    <p class="menu-text" id="game-over-text"> GAME OVER! </p>
+    <p>
+        <span class="menu-text" id="your-score"></span><span id="new-highscore"></span>
+    </p>
+
+    <div id="score-display-div">
+        <span class="menu-text" id="sign-in-message"> Sign in to save your scores</span>
+        <span class="menu-text" id="highscore-display"></span>
+        <button class="game-menu-button" id="save-score"> Save score </button>
+    </div>
+    <button class="game-menu-button" id="try-again-button"> Try Again </button>
+</div>
+
+<div class="body-divs">
+    <div id="score-div">
+        <span id="score-text"></span>
+        <span id="level-text"></span>
+        <button id="pause-button"><i id="pause-resume-icon" class="fa fa-pause" aria-hidden="true"></i></button>
+    </div>
+    <div class="container">
+        <div id="pause-menu">
+            <span class="menu-text"> Paused </span>
+            <div id="game-menu-div-4">
+                <button class="game-menu-button" id="resume-button"> Resume </button>
+                <button class="game-menu-button" id="back-button"> Main Menu </button>
+            </div>
+        </div>
+        <canvas class="body-divs" id="stage" width="600" height="600">
+        </canvas>
+    </div>
+</div>
+<div class="body-divs" id="play-buttons-div">
+    <button class="digital-keyboard"><i class='fas fa-caret-up' id="up"></i></button>
+    <div id="left-right-div">
+        <button class="digital-keyboard"><i class='fas fa-caret-left' id="left"></i></button>
+        <button class="digital-keyboard"><i class='fas fa-caret-right' id="right"></i></button>
+    </div>
+    <button class="digital-keyboard"><i class='fas fa-caret-down' id="down"></i></button>
+</div>
+
+<div class="body-divs" id="instruction-div">
+    <h3>Instructions</h3>
+    <div id="instructions-body">
+        <span class="instruction-title">How to play:</span>
+        <dl>
+            <dd> Simply use the arrows of your keyboard to move the snake! You can use the ESC key to pause the game if you need it. </dd>
+        </dl>
+        <span class="instruction-title">Objectives </span> <button class="disguised-buttons"  id="show-more-icon"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        <p></p>
+        <dl>
+            <dd>Starting as a SLUG, eat your way to be a SNAKE or even a PYTHON!</dd>
+            <dt> <span class="instruction-title">On easy</span> </dt>
+            <dd> Catch as many apples you can without biting yourself.</dd>
+            <dt> <span class="instruction-title">On hard</span> </dt>
+            <dd>Catch as many apples you can without biting yourself and without hitting the walls. Evolving the snake takes more apples.</dd>
+        </dl>
+    </div>
+</div>
+{% endblock %}
